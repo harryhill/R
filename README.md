@@ -1,7 +1,7 @@
 # R
 
-R用データ解析、および集計の最小単位のコード集
+R codes for data analysis.
 
-入力データはコメントで型式を掲示。
+input data sample are on the top of codes.
 
-出力のサンプルもコメントで表示。
+note what the code supporsed to be used.
