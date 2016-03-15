@@ -17,3 +17,7 @@ x <- iris[1:4]
 
 #use Fuzzy c means function named cluster::fanny
 kmeans
+
+###########
+## building
+###########
