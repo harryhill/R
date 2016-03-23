@@ -3,7 +3,6 @@ library(dplyr)
 library(scatterplot3d)
 library(ggplot2)
 
-#This code supporsed to be used when crassify data into clusters without distinction
 
 
 #set iris$Sepal.Length, Sepal.Width, Petal.Length, Petal.Width as training data
@@ -15,7 +14,7 @@ library(ggplot2)
 
 x <- iris[1:4]
 
-#use Fuzzy c means function named cluster::fanny
+
 kmeans
 
 ###########
