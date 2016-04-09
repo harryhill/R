@@ -15,8 +15,8 @@ library(ggplot2)
 x <- iris[1:4]
 
 
-kmeans
+class <- kmeans(x,3)
 
-###########
-## building
-###########
+cross_table <- table(iris[,5],class$cluster)
+
+cross_table
