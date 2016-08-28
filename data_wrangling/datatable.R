@@ -1,35 +1,57 @@
 library(data.table)
-library(dplyr)
+library(dtplyr)
+
 
 df <- data.frame(iris)
-df[, list(Species, Sepal.Width)] # select columns
-
 df1 <- df %>% mutate(key = row_number())
 
 dt <- data.table(df1)
 setkey(dt, key)
 
-dt.summ <- dt[, list(S.L = mean(Sepal.Length),
-                      S.W = mean(Sepal.Width),
-                      P.L = mean(Petal.Length),
-                      P.W = mean(Petal.Width)
-                      ), by = Species]
+dt.summary <- dt[, list(S.L = mean(Sepal.Length),
+                        S.W = mean(Sepal.Width),
+                        P.L = mean(Petal.Length),
+                        P.W = mean(Petal.Width)
+                        ), by = Species
+                 ]
 
 
-dt.summ1 <- dt[, list(S.L = Sepal.Length,
-                     S.W = Sepal.Width
-                     ), by = list(key,Species)]
+dt.summary1 <- dt[, list(S.L = Sepal.Length,
+                         S.W = Sepal.Width
+                         ), by = list(key,Species)
+                  ]
 
-dt.summ2 <- dt[, list(P.L = Petal.Length,
-                     P.W = Petal.Width
-                     ), by = list(key,Species)]
+dt.summary2 <- dt[, list(P.L = Petal.Length,
+                         P.W = Petal.Width
+                         ), by = list(key,Species)
+                  ]
 
 
-setkey(dt.summ1, key)
-setkey(dt.summ2, key)
-origin.dt <- merge(dt.summ1, dt.summ2)
+setkey(dt.summary1, key)
+setkey(dt.summary2, key)
+origin.dt <- merge(dt.summary1, dt.summary2)
 
 origin.dt <- origin.dt %>%
-  dplyr::select(Species.x, S.L, S.W, P.L, P.W)
+  select(Species.x, S.L, S.W, P.L, P.W)
+
+
+
+
+dt_tmp1 <- origin.dt %>%
+  group_by(Species.x) %>%
+  summarise(mean(S.L),
+            mean(S.W),
+            mean(P.L),
+            mean(P.W))
+
+
+
+
+
+
+
+
+dt <- data.table(x=rep(c("a","b","c"),each=3), y=c(1,3,6), v=1:9)
+
 
 
